@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <properties/>
+    <jcr:content
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Captivate Prime Widget Configurations"
+        sling:resourceType="granite/ui/components/shell/collectionpage"
+        consoleId="cp-widget-configurations"
+        contentPath="${requestPathInfo.suffix}"
+        currentView="${state[&quot;cp-widget.shell.collectionpage.layoutId&quot;].string}"
+        modeGroup="cp-widget-configuration-admin-child"
+        pageURITemplate="/apps/cpWidget/content/configurations.html"
+        targetCollection=".cp-widget-configuration-admin-child">
+        <head jcr:primaryType="nt:unstructured">
+            <clientlibs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/includeclientlibs"
+                categories="[apps.cpWidget.components.config]"/>
+        </head>
+        <views jcr:primaryType="nt:unstructured">
+            <card
+                granite:rel="cp-widget-configuration-admin-child"
+                jcr:primaryType="nt:unstructured"
+                jcr:title="Card View"
+                sling:resourceType="granite/ui/components/coral/foundation/masonry"
+                icon="viewCard"
+                layoutId="card"
+                limit="{Long}20"
+                modeGroup="cp-widget-configuration-admin-child"
+                path="${requestPathInfo.suffix}"
+                selectionMode="${state[&quot;cp-widget-configurations.shell.collectionpage.selectionMode&quot;].boolean}"
+                size="${empty requestPathInfo.selectors[1] ? &quot;20&quot; : requestPathInfo.selectors[1]}"
+                src="/apps/cpWidget/content/configurations/jcr:content/views/card.html{+id}"
+                stateId="cp-widget-configurations.shell.collectionpage">
+                <datasource
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="cpWidget/configurations"
+                    itemResourceType="/apps/cpWidget/components/views/card"
+                    limit="{Long}20"/>
+            </card>
+        </views>
+        <actions jcr:primaryType="nt:unstructured">
+            <primary jcr:primaryType="nt:unstructured"/>
+            <secondary jcr:primaryType="nt:unstructured">
+                <create
+                    granite:class="cq-confadmin-actions-createconfig-activator"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/collection/action"
+                    action="foundation.link"
+                    relScope="collection"
+                    target=".cp-widget-configuration-admin-child"
+                    text="Create"
+                    variant="primary">
+                    <data
+                        jcr:primaryType="nt:unstructured"
+                        href.uritemplate="/apps/cpWidget/content/configurations/properties.html"/>
+                </create>
+            </secondary>
+            <selection jcr:primaryType="nt:unstructured">
+                <properties
+                    granite:class="cp-widget-configurations-actions-properties-activator"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/collection/action"
+                    action="foundation.link"
+                    activeSelectionCount="single"
+                    icon="infoCircle"
+                    target=".cp-widget-configuration-admin-child"
+                    text="Properties"
+                    variant="actionBar">
+                    <data
+                        jcr:primaryType="nt:unstructured"
+                        href.uritemplate="/apps/cpWidget/content/configurations/properties.html{?item*}"/>
+                </properties>
+                <publish
+                    granite:rel="cp-widget-configurations-publish-activator"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/collection/action"
+                    activeSelectionCount="single"
+                    icon="globe"
+                    text="Publish"
+                    title="Publish"
+                    variant="actionBar">
+                </publish>
+                <unpublish
+                    granite:rel="cp-widget-configurations-unpublish-activator"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/collection/action"
+                    activeSelectionCount="single"
+                    icon="globeRemove"
+                    text="UnPublish"
+                    title="UnPublish"
+                    variant="actionBar">
+                </unpublish>
+                <delete
+                    granite:rel="cp-widget-configurations-delete-activator"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/collection/action"
+                    activeSelectionCount="single"
+                    icon="delete"
+                    text="Delete"
+                    title="Delete"
+                    variant="actionBar">
+                </delete>
+            </selection>
+        </actions>
+    </jcr:content>
+</jcr:root>

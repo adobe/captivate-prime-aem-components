@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        jcr:primaryType="nt:unstructured"
+        jcr:title="Captivate Prime Widget Configuration"
+        sling:resourceType="granite/ui/components/shell/propertiespage"
+        backHref="${empty header.Referer ? granite:concat(&quot;/apps/cpWidget/content/configurations.html&quot;, granite:encodeURIPath(granite:relativeParent(param.item, 3))) : header.Referer}"
+        formId="cp-widget-config-properties-form"
+        simpleSave="{Boolean}false">
+        <head jcr:primaryType="nt:unstructured">
+            <clientlibs
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/foundation/includeclientlibs"
+                categories="[apps.cpWidget.components.config]"/>
+        </head>
+        <content
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="granite/ui/components/coral/foundation/container">
+            <items jcr:primaryType="nt:unstructured">
+                <form
+                    granite:class="cp-widget-config-properties-form"
+                    granite:id="cp-widget-config-properties-form"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="granite/ui/components/coral/foundation/form"
+                    action="/apps/cpWidget/content/configurations/properties/updateConfiguration?item=${param.item}"
+                    dataPath="${param.item}/jcr:content"
+                    enctype="multipart/form-data"
+                    foundationForm="{Boolean}true"
+                    maximized="{Boolean}true"
+                    method="post"
+                    style="vertical">
+                    <items jcr:primaryType="nt:unstructured">
+                        <fixedColumnContainer
+                            granite:class="brand-portal-config-properties coral-FixedColumn"
+                            jcr:primaryType="nt:unstructured"
+                            sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
+                            <items jcr:primaryType="nt:unstructured">
+                                <fixedColumn1
+                                    jcr:primaryType="nt:unstructured"
+                                    sling:resourceType="granite/ui/components/coral/foundation/container">
+                                    <datasource jcr:primaryType="nt:unstructured"
+                                                sling:resourceType="cpWidget/configuration/datasource"/>
+                                </fixedColumn1>
+                            </items>
+                        </fixedColumnContainer>
+                    </items>
+                </form>
+            </items>
+        </content>
+    </jcr:content>
+    <updateConfiguration
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="cpWidget/updateConfiguration"/>
+</jcr:root>

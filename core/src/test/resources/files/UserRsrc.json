@@ -1,0 +1,8 @@
+ {
+     "profile": {
+       "jcr:primaryType": "cq:PageContent",
+       "cpWidget#commonConfig.captivateHostName": "https://captivateprimeqe.adobe.com",
+       "cpWidget#refreshToken": "123456",
+       "cpWidget#theme.background": "transparent"
+       }
+}

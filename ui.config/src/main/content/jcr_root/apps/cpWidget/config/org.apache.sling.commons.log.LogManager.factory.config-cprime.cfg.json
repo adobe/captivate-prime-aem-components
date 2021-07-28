@@ -1,0 +1,4 @@
+{
+    "org.apache.sling.commons.log.names": ["com.adobe.prime"],
+    "org.apache.sling.commons.log.level": "trace"
+}

@@ -1,0 +1,8 @@
+ {
+     "widgetModel": {
+       "jcr:primaryType": "nt:unstructured",
+       "sling:resourceType": "cprime/components/widget",
+       "name": "Admin Recommendation",
+       "cpWidget#widgetRefSelected": "com.adobe.captivateprime.lostrip.trending"
+       }
+}

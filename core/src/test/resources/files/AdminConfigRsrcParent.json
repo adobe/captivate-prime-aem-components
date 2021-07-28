@@ -1,0 +1,8 @@
+ {
+     "test-config": {
+       "jcr:primaryType": "cq:PageContent",
+       "cpWidget#commonConfig.captivateHostName": "https://captivateprimeqe.adobe.com",
+       "cpWidget#refreshToken": "f85a9acef88772630c7a55ea3ed9db96",
+       "cpWidget#theme.background": "transparent"
+       }
+}
