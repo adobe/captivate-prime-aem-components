@@ -5,7 +5,8 @@ Captivte Prime component for Adobe Experience Manager (AEM) to embed various wid
 ## Released Builds/Packages
 AEM package for the component 
 
-* [`captivate-prime.all-x.x.x.zip`](https://github.com/adobe/captivate-prime-aem-components/releases/latest): Build for AEM as a Cloud Service, AEM 6.4+, AEM 6.5+
+* [`captivate-prime.all-x.x.x.zip`](https://github.com/adobe/captivate-prime-aem-components/releases/latest): Build for AEM as a Cloud Service
+* [`captivate-prime.all-x.x.x-classic.zip`](https://github.com/adobe/captivate-prime-aem-components/releases/latest): Package for AEM 6.4+, AEM 6.5+
 
 
 ## How to build
