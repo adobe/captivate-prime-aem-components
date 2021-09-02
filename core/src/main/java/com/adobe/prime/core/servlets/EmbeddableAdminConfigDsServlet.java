@@ -147,6 +147,7 @@ public class EmbeddableAdminConfigDsServlet extends SlingAllMethodsServlet
       String value = "", emptyText = "";
       String fieldLabel = option.getName();
       boolean hidden = option.getHidden();
+      String helpxLink = option.getHelpx();
 
       if (option.getRef().equals("auth.accessToken"))
       {
@@ -180,13 +181,19 @@ public class EmbeddableAdminConfigDsServlet extends SlingAllMethodsServlet
 
         case "boolean":
           resourceList.add(createCheckBoxResource(request, name, value, option.getName(), fieldLabel, hidden));
-          resourceList.add(createHiddenTypeHint(request, name + "@TypeHint", "boolean"));
+          resourceList.add(createHiddenTypeHint(request, name + "@TypeHint", "boolean", false));
           break;
 
         default:
           String[] values = type.split("\\|");
           resourceList.add(createDropdownResource(request, name, required, fieldLabel, values, value, hidden));
           break;
+      }
+
+      if (helpxLink != null && helpxLink.length() > 0)
+      {
+        String helpxLinkName = Constants.AdminConfigurations.HELPXLINK_PREFIX + name;
+        resourceList.add(createHiddenTypeHint(request, helpxLinkName, helpxLink, true));
       }
     }
   }
@@ -231,7 +238,17 @@ public class EmbeddableAdminConfigDsServlet extends SlingAllMethodsServlet
     return new ValueMapResource(request.getResourceResolver(), "", resourceType, vm);
   }
 
-  private ValueMapResource createHiddenTypeHint(SlingHttpServletRequest request, String name, String value)
+  private ValueMapResource createHiddenTypeHint(SlingHttpServletRequest request, String name, String value, boolean disabled)
+  {
+    String resourceType = "granite/ui/components/coral/foundation/form/hidden";
+    ValueMap vm = new ValueMapDecorator(new HashMap<String, Object>());
+    vm.put("name", name);
+    vm.put("value", value);
+    vm.put("disabled", disabled);
+    return new ValueMapResource(request.getResourceResolver(), "", resourceType, vm);
+  }
+
+  private ValueMapResource createHiddenType(SlingHttpServletRequest request, String name, String value)
   {
     String resourceType = "granite/ui/components/coral/foundation/form/hidden";
     ValueMap vm = new ValueMapDecorator(new HashMap<String, Object>());

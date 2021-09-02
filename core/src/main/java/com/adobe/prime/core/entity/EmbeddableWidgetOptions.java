@@ -20,6 +20,7 @@ public class EmbeddableWidgetOptions
   private String description;
   private String ref;
   private String type;
+  private String helpx;
 
   @SerializedName(value = "default")
   private String defaultValue;
@@ -68,6 +69,16 @@ public class EmbeddableWidgetOptions
   public void setType(String type)
   {
     this.type = type;
+  }
+
+  public String getHelpx()
+  {
+    return helpx;
+  }
+
+  public void setHelpx(String helpx)
+  {
+    this.helpx = helpx;
   }
 
   public String getDefaultValue()

@@ -56,6 +56,7 @@ public final class Constants
     public static final String CLOUD_CONFIG_SETTINGS = "settings";
     public static final String CP_SUB_CONFIG_PATH =
         "/" + CLOUD_CONFIG_SETTINGS + "/" + CLOUD_CONFIG + "/" + CP_WIDGET_CONFIG + "/" + JcrConstants.JCR_CONTENT;
+    public static final String HELPXLINK_PREFIX = "cphelpx#";
 
     public static final String MASK_CHAR = "X";
     public static final int MASK_LENGTH = 4;

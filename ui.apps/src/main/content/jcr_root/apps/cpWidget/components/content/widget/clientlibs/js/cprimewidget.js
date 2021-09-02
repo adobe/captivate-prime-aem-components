@@ -40,7 +40,7 @@
             var widgetConfigs = configsDivWrapper.attr(WIDET_CONFIG_DATA);
             if (widgetConfigs)
             {
-               widgetConfigObj = JSON.parse(widgetConfigs.replaceAll("\\\"", "")); 
+               widgetConfigObj = JSON.parse(widgetConfigs);
             }
             
             var containerObj = $(this).get(0);

@@ -12,3 +12,12 @@
 .cp-hide-checkbox-elem {
   display: none !important;
 }
+
+.label-helpx {
+  display: inline-block!important;
+}
+
+.icon-helpx {
+  cursor: pointer;
+  margin-left: 1%;
+}

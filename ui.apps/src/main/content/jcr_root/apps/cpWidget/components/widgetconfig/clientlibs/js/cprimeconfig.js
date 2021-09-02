@@ -13,6 +13,7 @@
 
     "use strict";
     var GLOBAL_CONFIG_CP_PATH = "/conf/global/captivate-prime/";
+    var HELPX_PREFIX = "cphelpx";
     
     var COMMAND_URL= Granite.HTTP.externalize("/bin/wcmcommand");
     var REPLICATION_URL = Granite.HTTP.externalize("/bin/replicate.json");
@@ -26,6 +27,25 @@
     $(document).on("click", unpublishConfigActivatorClass, unpublishConfigMessage);
     
     var ui = $(window).adaptTo("foundation-ui");
+    
+    $(document).ready(function() {
+        $("input[name^=" + HELPX_PREFIX + "]").each(function (e) {
+            var label = $(this).prev("div .coral-Form-fieldwrapper").first().find("label").first();
+            var hrefVal = $(this).val();
+            label.addClass("label-helpx");
+            var coralIcon = new Coral.Icon().set({
+                icon: "help",
+                size: "S"
+            });
+            coralIcon.on("click", function(e) {
+               var href = $(e.target).attr("data-href");
+                window.open(href, "_blank");
+            });
+            $(coralIcon).attr("data-href", hrefVal);
+            $(coralIcon).addClass("icon-helpx");
+            label.after(coralIcon);
+        });
+    });
     
     function publishConfigMessage() {
         ui.wait();

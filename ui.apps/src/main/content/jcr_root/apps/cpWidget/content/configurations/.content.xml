@@ -4,7 +4,7 @@
     <properties/>
     <jcr:content
         jcr:primaryType="nt:unstructured"
-        jcr:title="Captivate Prime Widget Configurations"
+        jcr:title="Captivate Prime Configurations"
         sling:resourceType="granite/ui/components/shell/collectionpage"
         consoleId="cp-widget-configurations"
         contentPath="${requestPathInfo.suffix}"

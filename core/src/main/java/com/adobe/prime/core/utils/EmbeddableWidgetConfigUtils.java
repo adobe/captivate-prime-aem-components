@@ -137,7 +137,7 @@ public final class EmbeddableWidgetConfigUtils
       obj.addProperty(key, (Boolean) value);
     } else
     {
-      obj.addProperty(key, (String) value);
+      obj.addProperty(key, value.toString());
     }
   }
 

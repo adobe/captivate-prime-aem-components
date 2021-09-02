@@ -3,7 +3,7 @@
     jcr:primaryType="cq:Page">
     <jcr:content
         jcr:primaryType="nt:unstructured"
-        jcr:title="Captivate Prime Widget Configuration"
+        jcr:title="Captivate Prime Configuration"
         sling:resourceType="granite/ui/components/shell/propertiespage"
         backHref="${empty header.Referer ? granite:concat(&quot;/apps/cpWidget/content/configurations.html&quot;, granite:encodeURIPath(granite:relativeParent(param.item, 3))) : header.Referer}"
         formId="cp-widget-config-properties-form"
