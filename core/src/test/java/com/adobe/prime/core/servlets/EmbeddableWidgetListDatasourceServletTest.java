@@ -33,6 +33,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.adobe.granite.ui.components.ds.DataSource;
 import com.adobe.granite.ui.components.ds.SimpleDataSource;
 import com.adobe.prime.core.Constants;
+import com.adobe.prime.core.services.EmbeddableWidgetConfigurationService;
 import com.adobe.prime.core.services.EmbeddableWidgetService;
 
 import io.wcm.testing.mock.aem.junit5.AemContext;
@@ -46,7 +47,7 @@ public class EmbeddableWidgetListDatasourceServletTest
   private EmbeddableWidgetListDatasourceServlet dsServlet;
 
   @Mock
-  private EmbeddableWidgetService widgetService;
+  private EmbeddableWidgetConfigurationService widgetConfigService;
 
   @BeforeEach
   public void setUp() throws Exception
@@ -57,13 +58,14 @@ public class EmbeddableWidgetListDatasourceServletTest
     adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "commonConfig.captivateHostName", "https://captivateprimeqe.adobe.com");
     adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "refreshToken", "f85a9acef88772630c7a55ea3ed9db96");
     adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "theme.background", "transparent");
-    lenient().when(widgetService.getAvailaleAdminConfiguration(any(Resource.class))).thenReturn(adminConfigs);
+    lenient().when(widgetConfigService.getAvailaleAdminConfiguration(any(Resource.class))).thenReturn(adminConfigs);
 
-    Field replicatorField = EmbeddableWidgetListDatasourceServlet.class.getDeclaredField("widgetService");
+    Field replicatorField = EmbeddableWidgetListDatasourceServlet.class.getDeclaredField("widgetConfigService");
     replicatorField.setAccessible(true);
-    replicatorField.set(dsServlet, widgetService);
+    replicatorField.set(dsServlet, widgetConfigService);
 
-    ctx.registerService(EmbeddableWidgetService.class, widgetService, org.osgi.framework.Constants.SERVICE_RANKING, Integer.MAX_VALUE);
+    ctx.registerService(EmbeddableWidgetConfigurationService.class, widgetConfigService, org.osgi.framework.Constants.SERVICE_RANKING,
+        Integer.MAX_VALUE);
 
     ctx.requestPathInfo().setSuffix("/widget/page");
     ctx.load().json("/files/AdminConfigRsrc.json", "/widget/page");

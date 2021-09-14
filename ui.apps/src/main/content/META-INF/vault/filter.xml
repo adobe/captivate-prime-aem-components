@@ -4,5 +4,5 @@
     <filter root="/apps/cpWidget/components"/>
     <filter root="/apps/cpWidget/content"/>
     <filter root="/apps/cpWidget/install"/>
-    <filter root="/apps/cq"/>    
+    <filter root="/apps/cq/core/content/nav/tools/cloudservices/cpwidgetconfig"/>    
 </workspaceFilter>

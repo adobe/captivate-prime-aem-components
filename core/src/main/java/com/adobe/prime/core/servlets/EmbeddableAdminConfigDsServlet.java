@@ -12,7 +12,6 @@
 package com.adobe.prime.core.servlets;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -33,7 +32,6 @@ import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.api.servlets.HttpConstants;
 import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.api.wrappers.ValueMapDecorator;
-import org.osgi.service.component.ComponentContext;
 
 import com.adobe.granite.ui.components.ValueMapResourceWrapper;
 import com.adobe.granite.ui.components.ds.DataSource;
@@ -46,9 +44,9 @@ import com.adobe.prime.core.services.EmbeddableWidgetService;
 import com.adobe.prime.core.utils.EmbeddableWidgetConfigUtils;
 import com.day.cq.commons.jcr.JcrConstants;
 
-@Component(metatype = false, label = "Captivate Prime Admin Configuration Servlet", description = "Get Admin Configuration")
-@Properties({@Property(name = "sling.servlet.resourceTypes", value = {EmbeddableAdminConfigDsServlet.RESOURCE_TYPE}, propertyPrivate = true),
-    @Property(name = "sling.servlet.methods", value = HttpConstants.METHOD_GET, propertyPrivate = true),
+@Component(metatype = false)
+@Properties({@Property(name = "sling.servlet.resourceTypes", value = {EmbeddableAdminConfigDsServlet.RESOURCE_TYPE}),
+    @Property(name = "sling.servlet.methods", value = HttpConstants.METHOD_GET),
     @Property(name = org.osgi.framework.Constants.SERVICE_DESCRIPTION, value = "Admin Configuration Servlet")})
 @Service(Servlet.class)
 public class EmbeddableAdminConfigDsServlet extends SlingAllMethodsServlet
@@ -245,15 +243,6 @@ public class EmbeddableAdminConfigDsServlet extends SlingAllMethodsServlet
     vm.put("name", name);
     vm.put("value", value);
     vm.put("disabled", disabled);
-    return new ValueMapResource(request.getResourceResolver(), "", resourceType, vm);
-  }
-
-  private ValueMapResource createHiddenType(SlingHttpServletRequest request, String name, String value)
-  {
-    String resourceType = "granite/ui/components/coral/foundation/form/hidden";
-    ValueMap vm = new ValueMapDecorator(new HashMap<String, Object>());
-    vm.put("name", name);
-    vm.put("value", value);
     return new ValueMapResource(request.getResourceResolver(), "", resourceType, vm);
   }
 

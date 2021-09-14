@@ -5,6 +5,7 @@
        "cpWidget#refreshToken": "f85a9acef88772630c7a55ea3ed9db96",
        "cpWidget#clientId": "clientId",
        "cpWidget#clientSecret": "clientSecret",
-       "cpWidget#theme.background": "transparent"
-       }
+       "cpWidget#theme.background": "transparent",
+       "testConfig": "test1"
+      }
 }

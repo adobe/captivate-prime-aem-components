@@ -23,7 +23,6 @@ import javax.inject.Inject;
 
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.ScriptVariable;
@@ -33,6 +32,7 @@ import org.slf4j.LoggerFactory;
 
 import com.adobe.prime.core.Constants;
 import com.adobe.prime.core.entity.EmbeddableWidgetsConfig;
+import com.adobe.prime.core.services.EmbeddableWidgetConfigurationService;
 import com.adobe.prime.core.services.EmbeddableWidgetService;
 import com.adobe.prime.core.utils.EmbeddableWidgetConfigUtils;
 import com.day.cq.wcm.api.Page;
@@ -46,6 +46,9 @@ public class EmbeddableWidgetModel
 
   @Inject
   private transient EmbeddableWidgetService widgetService;
+
+  @Inject
+  private transient EmbeddableWidgetConfigurationService widgetConfigService;
 
   @ScriptVariable
   private Page currentPage;
@@ -72,9 +75,8 @@ public class EmbeddableWidgetModel
   {
     resource = request.getResource();
     properties = resource.getValueMap();
-    ResourceResolver currentUserResolver = request.getResourceResolver();
-    String accessToken = widgetService.getAccessTokenOfUser(request, currentUserResolver, currentPage);
-    Map<String, Object> adminConfigs = widgetService.getAvailaleAdminConfiguration(resource);
+    String accessToken = widgetService.getAccessTokenOfUser(request, currentPage);
+    Map<String, Object> adminConfigs = widgetConfigService.getAvailaleAdminConfiguration(resource);
     String hostName = adminConfigs.get(Constants.AdminConfigurations.ADMIN_CONFIG_HOST_NAME) != null
         ? adminConfigs.get(Constants.AdminConfigurations.ADMIN_CONFIG_HOST_NAME).toString()
         : widgetService.getDefaultHostName();
@@ -141,7 +143,7 @@ public class EmbeddableWidgetModel
     widgetObject.put("type", "acapConfig");
 
     Resource currentRsrc = request.getResourceResolver().getResource(currentPage.getPath());
-    Map<String, Object> generalSettingConfig = widgetService.getGeneralConfigs(currentRsrc);
+    Map<String, Object> generalSettingConfig = widgetConfigService.getGeneralConfigs(currentRsrc);
     widgetObject.putAll(generalSettingConfig);
 
     widgetObject.put("auth.accessToken", accessToken);
@@ -176,7 +178,7 @@ public class EmbeddableWidgetModel
 
   public String getRunMode()
   {
-    return widgetService.isAuthorMode() ? Constants.RUNMODE_AUTHOR : Constants.RUNMODE_NON_AUTHOR;
+    return Constants.RUNMODE_NON_AUTHOR;
   }
 
   public String getWidgetCommunicatorUrl()

@@ -11,6 +11,7 @@
 
 package com.adobe.prime.core.services;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.lenient;
 
@@ -24,10 +25,10 @@ import javax.jcr.Session;
 import org.apache.jackrabbit.api.JackrabbitSession;
 import org.apache.jackrabbit.api.security.user.User;
 import org.apache.jackrabbit.api.security.user.UserManager;
+import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;
-import org.apache.sling.settings.SlingSettingsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -52,10 +53,13 @@ public class EmbeddableWidgetServiceImplTest
       Collections.<String, Object>singletonMap(ResourceResolverFactory.SUBSERVICE, SUBSERVICE_NAME);
 
   @Mock
-  private SlingSettingsService slingSettingService;
+  private ResourceResolverFactory resolverFactory;
 
   @Mock
-  private ResourceResolverFactory resolverFactory;
+  private EmbeddableWidgetUserService widgetUserService;
+
+  @Mock
+  private EmbeddableWidgetConfigurationService widgetConfigService;
 
   @Mock
   UserManager userManager;
@@ -78,14 +82,33 @@ public class EmbeddableWidgetServiceImplTest
     lenient().when(resolverFactory.getServiceResourceResolver(SERVICE_PARAMS)).thenReturn(ctx.resourceResolver());
     ctx.registerService(ResourceResolverFactory.class, resolverFactory, org.osgi.framework.Constants.SERVICE_RANKING, Integer.MAX_VALUE);
     
-    ctx.registerService(SlingSettingsService.class, slingSettingService, org.osgi.framework.Constants.SERVICE_RANKING, Integer.MAX_VALUE);
+    lenient().when(widgetUserService.getUserEmail(eq(ctx.request()))).thenReturn("vaishnav@adobe.com");
+    lenient().when(widgetUserService.getAccessTokenWithExpiry(any(SlingHttpServletRequest.class), any(Page.class), any(String.class)))
+        .thenReturn(null);
+    ctx.registerService(EmbeddableWidgetUserService.class, widgetUserService, org.osgi.framework.Constants.SERVICE_RANKING, Integer.MAX_VALUE);
+
+    Map<String, Object> adminConfigs = new HashMap<>();
+    adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "commonConfig.captivateHostName", "https://captivateprimeqe.adobe.com");
+    adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "refreshToken", "1234");
+    adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "clientId", "1234");
+    adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "clientSecret", "1234");
+    adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "theme.background", "transparent");
+    lenient().when(widgetConfigService.getAvailaleAdminConfiguration(any(Resource.class))).thenReturn(adminConfigs);
+    lenient().when(widgetConfigService.getGeneralConfigs(any(Resource.class))).thenReturn(adminConfigs);
+    ctx.registerService(EmbeddableWidgetConfigurationService.class, widgetConfigService, org.osgi.framework.Constants.SERVICE_RANKING,
+        Integer.MAX_VALUE);
 
     serviceImpl = new EmbeddableWidgetServiceImpl();
     Field resourceResolverFactory = EmbeddableWidgetServiceImpl.class.getDeclaredField("resourceResolverFactory");
     resourceResolverFactory.set(serviceImpl, resolverFactory);
 
-    Field settingsService = EmbeddableWidgetServiceImpl.class.getDeclaredField("settingsService");
-    settingsService.set(serviceImpl, slingSettingService);
+    Field replicatorField = EmbeddableWidgetServiceImpl.class.getDeclaredField("widgetConfigService");
+    replicatorField.setAccessible(true);
+    replicatorField.set(serviceImpl, widgetConfigService);
+
+    replicatorField = EmbeddableWidgetServiceImpl.class.getDeclaredField("widgetUserService");
+    replicatorField.setAccessible(true);
+    replicatorField.set(serviceImpl, widgetUserService);
 
     ctx.load().json("/files/UserRsrc.json", "/home/user/vaishnav");
     ValueMock[] emailValues = new ValueMock[] {new ValueMock("vaishnav@adobe.com")};
@@ -112,15 +135,15 @@ public class EmbeddableWidgetServiceImplTest
   @Test
   public void testAccessTokenOfUserAuthorInstance()
   {
-    lenient().when(slingSettingService.getRunModes()).thenReturn(Collections.singleton("author"));
-    serviceImpl.getAccessTokenOfUser(ctx.request(), ctx.resourceResolver(), ctx.currentPage());
+    // lenient().when(slingSettingService.getRunModes()).thenReturn(Collections.singleton("author"));
+    serviceImpl.getAccessTokenOfUser(ctx.request(), ctx.currentPage());
   }
 
   @Test
   public void testAccessTokenOfUserPublishInstance()
   {
-    lenient().when(slingSettingService.getRunModes()).thenReturn(Collections.singleton("publish"));
-    serviceImpl.getAccessTokenOfUser(ctx.request(), ctx.resourceResolver(), ctx.currentPage());
+    // lenient().when(slingSettingService.getRunModes()).thenReturn(Collections.singleton("publish"));
+    serviceImpl.getAccessTokenOfUser(ctx.request(), ctx.currentPage());
   }
 
 }

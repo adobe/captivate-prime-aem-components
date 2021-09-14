@@ -11,14 +11,13 @@
 
 package com.adobe.prime.core.services;
 
-import org.apache.sling.api.SlingHttpServletRequest;
+import java.util.Map;
 
-import com.day.cq.wcm.api.Page;
+import org.apache.sling.api.resource.Resource;
 
-public interface EmbeddableWidgetService
+public interface EmbeddableWidgetConfigurationService
 {
+  public Map<String, Object> getGeneralConfigs(Resource resource);
 
-  public String getAccessTokenOfUser(SlingHttpServletRequest request, Page currentPage);
-
-  public String getDefaultHostName();
+  public Map<String, Object> getAvailaleAdminConfiguration(Resource resource);
 }

@@ -30,6 +30,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.adobe.prime.core.Constants;
+import com.adobe.prime.core.services.EmbeddableWidgetConfigurationService;
 import com.adobe.prime.core.services.EmbeddableWidgetService;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.scripting.WCMBindingsConstants;
@@ -44,11 +45,12 @@ public class EmbeddableWidgetModelTest
   private final AemContext ctx = new AemContext(ResourceResolverType.JCR_MOCK);
 
   private EmbeddableWidgetModel widgetModel;
-  private Page page;
-  private Resource resource;
 
   @Mock
   private EmbeddableWidgetService widgetService;
+
+  @Mock
+  private EmbeddableWidgetConfigurationService widgetConfigService;
 
   @Mock
   private Page currentPage;
@@ -57,20 +59,20 @@ public class EmbeddableWidgetModelTest
   void setUp()
   {
     ctx.addModelsForClasses(EmbeddableWidgetModel.class);
-    page = ctx.create().page("/content/mypage");
-    resource = ctx.create().resource(page, "embeddablewidget", "sling:resourceType", "cprime/components/embeddablewidget");
-
-    lenient().when(widgetService.getAccessTokenOfUser(eq(ctx.request()), eq(ctx.request().getResourceResolver()), any(Page.class)))
+    
+    lenient().when(widgetService.getAccessTokenOfUser(eq(ctx.request()), any(Page.class)))
         .thenReturn("123456");
     lenient().when(widgetService.getDefaultHostName()).thenReturn("https://captivateprimeqe.adobe.com");
+    ctx.registerService(EmbeddableWidgetService.class, widgetService, org.osgi.framework.Constants.SERVICE_RANKING, Integer.MAX_VALUE);
     Map<String, Object> adminConfigs = new HashMap<>();
     adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "commonConfig.captivateHostName", "https://captivateprimeqe.adobe.com");
     adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "refreshToken", "1234");
     adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "theme.background", "transparent");
-    lenient().when(widgetService.getAvailaleAdminConfiguration(any(Resource.class))).thenReturn(adminConfigs);
-    lenient().when(widgetService.getGeneralConfigs(any(Resource.class))).thenReturn(adminConfigs);
-    lenient().when(widgetService.isAuthorMode()).thenReturn(true);
-    ctx.registerService(EmbeddableWidgetService.class, widgetService, org.osgi.framework.Constants.SERVICE_RANKING, Integer.MAX_VALUE);
+
+    lenient().when(widgetConfigService.getAvailaleAdminConfiguration(any(Resource.class))).thenReturn(adminConfigs);
+    lenient().when(widgetConfigService.getGeneralConfigs(any(Resource.class))).thenReturn(adminConfigs);
+    ctx.registerService(EmbeddableWidgetConfigurationService.class, widgetConfigService, org.osgi.framework.Constants.SERVICE_RANKING,
+        Integer.MAX_VALUE);
 
     SlingBindings slingBindings = (SlingBindings) ctx.request().getAttribute(SlingBindings.class.getName());
     slingBindings.put(WCMBindingsConstants.NAME_CURRENT_PAGE, currentPage);
@@ -94,8 +96,6 @@ public class EmbeddableWidgetModelTest
   @Test
   void testProperties()
   {
-    String expectedProperties =
-        "{\"cpWidget#widgetRefSelected\":\"com.adobe.captivateprime.lostrip.trending\",\"name\":\"Admin Recommendation\",\"sling:resourceType\":\"cprime/components/widget\",\"jcr:primaryType\":\"nt:unstructured\"}";
     String properties = widgetModel.getProperties();
     assertTrue(properties.contains("com.adobe.captivateprime.lostrip.trending"));
     assertTrue(properties.contains("Admin Recommendation"));
@@ -122,7 +122,7 @@ public class EmbeddableWidgetModelTest
   @Test
   void testRunMode()
   {
-    String expectedRunMode = "author";
+    String expectedRunMode = "non-author";
     String runMode = widgetModel.getRunMode();
     assertTrue(expectedRunMode.equals(runMode));
   }

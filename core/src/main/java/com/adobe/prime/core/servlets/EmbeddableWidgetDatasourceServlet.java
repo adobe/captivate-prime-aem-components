@@ -40,6 +40,7 @@ import com.adobe.granite.ui.components.ds.ValueMapResource;
 import com.adobe.prime.core.Constants;
 import com.adobe.prime.core.entity.EmbeddableWidgetOptions;
 import com.adobe.prime.core.entity.EmbeddableWidgetsConfig;
+import com.adobe.prime.core.services.EmbeddableWidgetConfigurationService;
 import com.adobe.prime.core.services.EmbeddableWidgetService;
 import com.adobe.prime.core.utils.EmbeddableWidgetConfigUtils;
 import com.day.cq.commons.jcr.JcrConstants;
@@ -56,6 +57,9 @@ public class EmbeddableWidgetDatasourceServlet extends SlingAllMethodsServlet
 
   @Reference
   private transient EmbeddableWidgetService widgetService;
+
+  @Reference
+  private transient EmbeddableWidgetConfigurationService widgetConfigService;
 
   final static String RESOURCE_TYPE = "cpPrime/widgets/datasource/widgetsdatasource";
 
@@ -74,7 +78,7 @@ public class EmbeddableWidgetDatasourceServlet extends SlingAllMethodsServlet
       if (resource != null)
       {
         ValueMap valueMap = resource.getValueMap();
-        Map<String, Object> adminConfigs = widgetService.getAvailaleAdminConfiguration(resource);
+        Map<String, Object> adminConfigs = widgetConfigService.getAvailaleAdminConfiguration(resource);
         String hostName = adminConfigs.get(Constants.AdminConfigurations.ADMIN_CONFIG_HOST_NAME) != null
             ? adminConfigs.get(Constants.AdminConfigurations.ADMIN_CONFIG_HOST_NAME).toString()
             : widgetService.getDefaultHostName();

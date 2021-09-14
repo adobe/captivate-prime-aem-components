@@ -9,7 +9,7 @@
  * limitations under the License.
  */
 
-@Version("1.0")
+@Version("1.1")
 package com.adobe.prime.core.servlets;
 
 import org.osgi.annotation.versioning.Version;
