@@ -69,7 +69,8 @@ public class EmbeddableWidgetServiceImpl implements EmbeddableWidgetService
   private static final Map<String, Object> SERVICE_PARAMS =
       Collections.<String, Object>singletonMap(ResourceResolverFactory.SUBSERVICE, SUBSERVICE_NAME);
 
-  private static final long ACCESS_TOKEN_EXPIRY_BUFFER_MS = 3600000; // 1Hr
+  private static final long ACCESS_TOKEN_EXPIRY_BUFFER_MS = 86400000; // 24 Hr
+  private static final long ACCESS_TOKEN_MIN_VALIDITY_SEC = 86400; // 24 Hr
   private final static String DEFAULT_HOST = "https://captivateprime.adobe.com";
 
   @Property(label = "HostName", description = "Provide hostname to fetch configs in the format (https://captivateprime.adobe.com).",
@@ -117,27 +118,13 @@ public class EmbeddableWidgetServiceImpl implements EmbeddableWidgetService
             adminConfigs.get(Constants.CP_NODE_PROPERTY_PREFIX + Constants.AdminConfigurations.ADMIN_CONFIG_CLIENT_SECRET).toString();
 
         LOGGER.debug("EmbeddableWidgetServiceImpl getAccessTokenOfUser:: Fetching Access Token");
-        String accessTokenResponse = fetchAccessToken(hostName, clientId, clientSecret, refreshToken, email, false);
+        String accessTokenResponse = fetchAccessToken(hostName, clientId, clientSecret, refreshToken, email);
         Pair<String, Long> resp = getTokenAndExpiry(accessTokenResponse);
 
         if (resp == null)
         {
           LOGGER.error("EmbeddableWidgetServiceImpl getAccessTokenOfUser:: Exception in fetching access_token. Response- {}", accessTokenResponse);
           return "";
-        }
-
-        if (currentTime > resp.getRight())
-        {
-          LOGGER.debug("EmbeddableWidgetServiceImpl getAccessTokenOfUser:: Force fetch token");
-          accessTokenResponse = fetchAccessToken(hostName, clientId, clientSecret, refreshToken, email, true);
-          resp = getTokenAndExpiry(accessTokenResponse);
-
-          if (resp == null)
-          {
-            LOGGER.error("EmbeddableWidgetServiceImpl getAccessTokenOfUser:: Exception in force fetching access_token. Response- {}",
-                accessTokenResponse);
-            return "";
-          }
         }
 
         accessToken = resp.getLeft();
@@ -170,13 +157,13 @@ public class EmbeddableWidgetServiceImpl implements EmbeddableWidgetService
     return configHostName;
   }
 
-  private String fetchAccessToken(String hostName, String clientId, String clientSecret, String refreshToken, String email, boolean force)
+  private String fetchAccessToken(String hostName, String clientId, String clientSecret, String refreshToken, String email)
   {
     LOGGER.debug("EmbeddableWidgetServiceImpl FetchAccessToken:: HostName {}, email {}", hostName, email);
     try
     {
       String url = hostName
-          + Constants.CPUrl.ACCESS_TOKEN_URL.replace("{email}", URLEncoder.encode(email, "UTF-8")).replace("{force}", (force ? "true" : "false"));
+          + Constants.CPUrl.ACCESS_TOKEN_URL.replace("{email}", URLEncoder.encode(email, "UTF-8")).replace("{min_validity_sec}", String.valueOf(ACCESS_TOKEN_MIN_VALIDITY_SEC));
       HttpPost post = new HttpPost(url);
       post.setHeader("Content-Type", "application/json");
 
