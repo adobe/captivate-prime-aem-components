@@ -92,7 +92,6 @@ public class EmbeddableWidgetModelTest
         "{\"widgetRefSelected\":\"com.adobe.captivateprime.lostrip.trending\",\"auth\":{\"accessToken\":\"123456\"},\"type\":\"acapConfig\",\"widgetConfig\":{\"widgetRef\":\"com.adobe.captivateprime.lostrip.trending\"}}";
     String configs = widgetModel.getWidgetConfigs();
     assertTrue(JsonParser.parseString(configs).equals(JsonParser.parseString(expectedConfigs)));
-
   }
 
   @Test
