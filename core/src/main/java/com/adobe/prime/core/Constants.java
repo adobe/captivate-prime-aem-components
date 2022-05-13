@@ -26,7 +26,7 @@ public final class Constants
   public static final String CP_NODE_PROPERTY_PREFIX = "cpWidget#";
   public static final String SELECTED_WIDGET_REF = "cpWidget#widgetRefSelected";
 
-  public static final String DEFAULT_HOST = "https://captivateprime.adobe.com";
+  public static final String DEFAULT_HOST = "https://learningmanager.adobe.com";
 
   public final class CPUrl
   {

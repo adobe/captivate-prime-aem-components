@@ -49,8 +49,8 @@ import com.day.cq.wcm.api.Page;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-@Component(metatype = true, immediate = true, label = "Captivate Prime Embeddable Widget Service",
-    description = "Captivate Prime Embeddable Widget Service")
+@Component(metatype = true, immediate = true, label = "Adobe Learning Manager Embeddable Widget Service",
+    description = "Adobe Learning Manager Embeddable Widget Service")
 @Service(value = EmbeddableWidgetService.class)
 public class EmbeddableWidgetServiceImpl implements EmbeddableWidgetService
 {
@@ -71,9 +71,9 @@ public class EmbeddableWidgetServiceImpl implements EmbeddableWidgetService
 
   private static final long ACCESS_TOKEN_EXPIRY_BUFFER_MS = 86400000; // 24 Hr
   private static final long ACCESS_TOKEN_MIN_VALIDITY_SEC = 86400; // 24 Hr
-  private final static String DEFAULT_HOST = "https://captivateprime.adobe.com";
+  private final static String DEFAULT_HOST = "https://learningmanager.adobe.com";
 
-  @Property(label = "HostName", description = "Provide hostname to fetch configs in the format (https://captivateprime.adobe.com).",
+  @Property(label = "HostName", description = "Provide hostname to fetch configs in the format (https://learningmanager.adobe.com).",
       value = DEFAULT_HOST)
   private static final String CONFIG_HOST_NAME = "config.hostname";
   private String configHostName;

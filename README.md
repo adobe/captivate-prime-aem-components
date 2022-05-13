@@ -1,6 +1,6 @@
-# AEM Captivate Prime Component
+# AEM Adobe Learning Manager Component
 
-Captivate Prime component for Adobe Experience Manager (AEM) to embed various widgets present in the Captivate Prime learner app in AEM sites. Please refer this [helpx page](https://helpx.adobe.com/captivate-prime/integrate-aem-captivate-prime.html)
+Adobe Learning Manager component for Adobe Experience Manager (AEM) to embed various widgets present in the Adobe Learning Manager learner app in AEM sites. Please refer this [helpx page](https://helpx.adobe.com/captivate-prime/integrate-aem-captivate-prime.html)
 
 ## Released Builds/Packages
 AEM package for the component 

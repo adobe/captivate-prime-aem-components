@@ -27,7 +27,7 @@
 	<artifactId>captivate-prime.core</artifactId>
 	<packaging>bundle</packaging>
 	<name>CPWidget - Core</name>
-	<description>Core bundle for Captivate Prime Widget</description>
+	<description>Core bundle for Adobe Learning Manager Widget</description>
 	<build>
 		<plugins>
 			<plugin>
