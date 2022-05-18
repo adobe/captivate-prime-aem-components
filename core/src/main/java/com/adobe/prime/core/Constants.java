@@ -26,11 +26,12 @@ public final class Constants
   public static final String CP_NODE_PROPERTY_PREFIX = "cpWidget#";
   public static final String SELECTED_WIDGET_REF = "cpWidget#widgetRefSelected";
 
-  public static final String DEFAULT_HOST = "https://learningmanager.adobe.com";
+  public static final String DEFAULT_HOST = "https://captivateprime.adobe.com";
 
   public final class CPUrl
   {
     public static final String CONFIG_URL = "/app/embeddablewidget?widgetRef=widgets-aem";
+    public static final String SKU_VALIDATION_URL = "/primeapi/v2/account/{accountId}/connectorConfig?connectorName=aemComponents";
     public static final String ACCESS_TOKEN_URL = "/oauth/o/learnerToken?learner_email={email}&min_validity_sec={min_validity_sec}";
     public static final String WIDGET_CONFIG_URL = "/app/embeddablewidget?widgetRef=widgets-aem";
     public static final String WIDGET_SRC_URL = "{hostName}/app/embeddablewidget?widgetRef={widgetRef}&resourceType=html";
@@ -42,6 +43,7 @@ public final class Constants
     public static final String ADMIN_CONFIG_CLIENT_ID = "clientId";
     public static final String ADMIN_CONFIG_CLIENT_SECRET = "clientSecret";
     public static final String ADMIN_CONFIG_REFRESH_TOKEN = "refreshToken";
+    public static final String ADMIN_CONFIG_ACCOUNT_ID = "accountId";
 
     public static final String ADMIN_CONFIG_HOST_NAME = CP_NODE_PROPERTY_PREFIX + "commonConfig.captivateHostName";
     public static final String GLOBAL_CONFIG_SETTINGS = "/conf/global/settings";

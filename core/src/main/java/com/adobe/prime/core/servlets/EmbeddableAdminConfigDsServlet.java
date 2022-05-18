@@ -103,6 +103,12 @@ public class EmbeddableAdminConfigDsServlet extends SlingAllMethodsServlet
       resourceList.add(createTextFieldResource(request, titleName, "", "", true, "Config Title", false, false));
     }
 
+    String accountIdName = Constants.CP_NODE_PROPERTY_PREFIX + Constants.AdminConfigurations.ADMIN_CONFIG_ACCOUNT_ID;
+    String accountIdValue = map.get(Constants.CP_NODE_PROPERTY_PREFIX + Constants.AdminConfigurations.ADMIN_CONFIG_ACCOUNT_ID) != null
+        ? map.get(Constants.CP_NODE_PROPERTY_PREFIX + Constants.AdminConfigurations.ADMIN_CONFIG_ACCOUNT_ID).toString()
+        : "";
+    resourceList.add(createTextFieldResource(request, accountIdName, accountIdValue, "", true, "Account ID", false, false));
+
     String refreshTokenName = Constants.CP_NODE_PROPERTY_PREFIX + Constants.AdminConfigurations.ADMIN_CONFIG_REFRESH_TOKEN;
     String refreshTokenValue = "";
     Object refreshTokenValueObj = map.get(Constants.CP_NODE_PROPERTY_PREFIX + Constants.AdminConfigurations.ADMIN_CONFIG_REFRESH_TOKEN);

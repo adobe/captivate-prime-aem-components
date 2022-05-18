@@ -12,13 +12,14 @@
 (function (document, $) {
 
     "use strict";
-    var GLOBAL_CONFIG_CP_PATH = "/conf/global/captivate-prime/";
-    var HELPX_PREFIX = "cphelpx";
+    const GLOBAL_CONFIG_CP_PATH = "/conf/global/captivate-prime/";
+    const HELPX_PREFIX = "cphelpx";
+    const SKU_VALIDATION_ERROR = "Error in SKU Validation";
     
-    var COMMAND_URL= Granite.HTTP.externalize("/bin/wcmcommand");
-    var REPLICATION_URL = Granite.HTTP.externalize("/bin/replicate.json");
+    const COMMAND_URL= Granite.HTTP.externalize("/bin/wcmcommand");
+    const REPLICATION_URL = Granite.HTTP.externalize("/bin/replicate.json");
 
-    var deleteConfigActivatorClass = ".cp-widget-configurations-delete-activator",
+    const deleteConfigActivatorClass = ".cp-widget-configurations-delete-activator",
         publishConfigActivatorClass = ".cp-widget-configurations-publish-activator",
         unpublishConfigActivatorClass = ".cp-widget-configurations-unpublish-activator";
 
@@ -26,9 +27,21 @@
     $(document).on("click", publishConfigActivatorClass, publishConfigMessage);
     $(document).on("click", unpublishConfigActivatorClass, unpublishConfigMessage);
     
-    var ui = $(window).adaptTo("foundation-ui");
+    const ui = $(window).adaptTo("foundation-ui");
+
+    function handleFormSubmitSkuError() {
+        $(window).adaptTo("foundation-registry").register("foundation.form.response.ui.error", {
+            name: "foundation.sling",
+            handler: function(form, data, xhr, error, errorThrown) {
+                if (xhr.responseText.includes(SKU_VALIDATION_ERROR)) {
+                    ui.alert("Error", SKU_VALIDATION_ERROR, "error");
+                }
+            }
+        });
+    }
     
     $(document).ready(function() {
+        handleFormSubmitSkuError();
         $("input[name^=" + HELPX_PREFIX + "]").each(function (e) {
             var label = $(this).prev("div .coral-Form-fieldwrapper").first().find("label").first();
             var hrefVal = $(this).val();
