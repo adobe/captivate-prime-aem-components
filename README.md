@@ -5,8 +5,8 @@ Adobe Learning Manager component for Adobe Experience Manager (AEM) to embed var
 ## Released Builds/Packages
 AEM package for the component 
 
-* [`captivate-prime.all-x.x.x.zip`](https://github.com/adobe/captivate-prime-aem-components/releases/latest): Build for AEM as a Cloud Service
-* [`captivate-prime.all-x.x.x-classic.zip`](https://github.com/adobe/captivate-prime-aem-components/releases/latest): Package for AEM 6.4+, AEM 6.5+
+* [`learning-manager.all-x.x.x.zip`](https://github.com/adobe/captivate-prime-aem-components/releases/latest): Build for AEM as a Cloud Service
+* [`learning-manager.all-x.x.x-classic.zip`](https://github.com/adobe/captivate-prime-aem-components/releases/latest): Package for AEM 6.4+, AEM 6.5+
 
 
 ## How to build
@@ -19,7 +19,7 @@ Project is also compatible with AEM **6.4+** and **6.5+**. Add profile `classic`
 
     mvn clean install -Pclassic
 
-zip package- **captivate-prime.all-x.x.x.zip** will be available in `all/target` 	 folder.
+zip package- **learning-manager.all-x.x.x.zip** will be available in `all/target` 	 folder.
 
 
 ## System Requirements

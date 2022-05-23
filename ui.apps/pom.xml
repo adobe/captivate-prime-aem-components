@@ -21,17 +21,17 @@
     <!-- ====================================================================== -->
     <parent>
         <groupId>com.adobe.prime</groupId>
-        <artifactId>captivate-prime</artifactId>
-        <version>1.3.0</version>
+        <artifactId>learning-manager</artifactId>
+        <version>1.4.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <!-- ====================================================================== -->
     <!-- P R O J E C T  D E S C R I P T I O N                                   -->
     <!-- ====================================================================== -->
-    <artifactId>captivate-prime.ui.apps</artifactId>
+    <artifactId>learning-manager.ui.apps</artifactId>
     <packaging>content-package</packaging>
-    <name>CPWidget - UI apps</name>
+    <name>Adobe Learning Manager - UI apps</name>
     <description>UI apps package for Adobe Learning Manager Widget</description>
 
     <!-- ====================================================================== -->
@@ -75,7 +75,7 @@
                 <artifactId>filevault-package-maven-plugin</artifactId>
                 <configuration>
                     <group>com.adobe.prime</group>
-                    <name>captivate-prime.ui.apps</name>
+                    <name>learning-manager.ui.apps</name>
                     <packageType>application</packageType>
                     <accessControlHandling>merge</accessControlHandling>
                     <validatorsSettings>
@@ -86,7 +86,7 @@
                     <repositoryStructurePackages>
                         <repositoryStructurePackage>
                             <groupId>com.adobe.prime</groupId>
-                            <artifactId>captivate-prime.ui.apps.structure</artifactId>
+                            <artifactId>learning-manager.ui.apps.structure</artifactId>
                         </repositoryStructurePackage>
                     </repositoryStructurePackages>
                     <dependencies>
@@ -134,13 +134,13 @@
     <dependencies>
         <dependency>
             <groupId>com.adobe.prime</groupId>
-            <artifactId>captivate-prime.core</artifactId>
+            <artifactId>learning-manager.core</artifactId>
             <version>${project.version}</version>
         </dependency>
 		
 		<dependency>
             <groupId>com.adobe.prime</groupId>
-            <artifactId>captivate-prime.ui.apps.structure</artifactId>
+            <artifactId>learning-manager.ui.apps.structure</artifactId>
             <version>${project.version}</version>
             <type>zip</type>
         </dependency>

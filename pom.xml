@@ -18,9 +18,9 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.adobe.prime</groupId>
-    <artifactId>captivate-prime</artifactId>
+    <artifactId>learning-manager</artifactId>
     <packaging>pom</packaging>
-    <version>1.3.0</version>
+    <version>1.4.0</version>
 	<description>Adobe Learning Manager Widget</description>
 
     <modules>
@@ -58,7 +58,7 @@
 	
 	<developers>
         <developer>
-            <id>captivate-prime-widget</id>
+            <id>learning-manager-widget</id>
             <organization>Adobe</organization>
             <organizationUrl>https://www.adobe.com</organizationUrl>
             <url>https://helpx.adobe.com/captivate-prime/integrate-aem-captivate-prime.html</url>

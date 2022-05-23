@@ -21,15 +21,15 @@
     <!-- ====================================================================== -->
     <parent>
         <groupId>com.adobe.prime</groupId>
-        <artifactId>captivate-prime</artifactId>
-        <version>1.3.0</version>
+        <artifactId>learning-manager</artifactId>
+        <version>1.4.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <!-- ====================================================================== -->
     <!-- P R O J E C T  D E S C R I P T I O N                                   -->
     <!-- ====================================================================== -->
-    <artifactId>captivate-prime.ui.apps.structure</artifactId>
+    <artifactId>learning-manager.ui.apps.structure</artifactId>
     <packaging>content-package</packaging>
     <name>Adobe Learning Manager - UI apps structure</name>
     <description>
