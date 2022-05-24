@@ -14,40 +14,52 @@
     
     var CP_DIALOG_REL = ".cp-dialog-form-rel";
 
-   $(document).on("foundation-contentloaded", function (e) {
-         $(document).on("change", ".selector-widget", function(e) {
-             
-             $(CP_DIALOG_REL).find("input[type='hidden']").each(function() { 
-                 if ($(this).attr("name").indexOf("@Delete") != -1) {
-                     $(this).remove();
-                 }
-             });
-             
-             var selectedWidget = $('.selector-widget coral-select-item:selected')[0].value;
-             
-             $(CP_DIALOG_REL).find(":input, coral-select").each(function (e) {
-                 var elemName = $(this).attr("name");
-                 var itemType = $(this).attr("itemtype");
-                 
-                 if (elemName && itemType) {
-                     if (itemType !== selectedWidget) {
-                         $(this).closest("div.coral-Form-fieldwrapper").attr("hidden",'');
-                         var deleteName = elemName + "@Delete";
-                             $('<input>').attr({type:'hidden', 
-                                                name: deleteName}).appendTo(CP_DIALOG_REL);
-                            $(this).attr("disabled","");
-                     } else {
-                         var divWrapper = $(this).closest("div.coral-Form-fieldwrapper");
-                         if (divWrapper.find("label#hideOption").length < 1) {
-                             divWrapper.removeAttr("hidden");
-                         }
-                         $(this).removeAttr("disabled");
-                     }
-                 } 
-             });
-            
-   		 });
+    function handleHiddenOptions()
+    {
+        $("input.hideOption").closest("div.coral-Form-fieldwrapper").attr("hidden",'');
+    }
 
+    function handleSelection() {
+      $(CP_DIALOG_REL).find("input[type='hidden']").each(function () {
+          if ($(this).attr("name").indexOf("@Delete") != -1) {
+            $(this).remove();
+          }
+        });
+
+      var selectedWidget = $(".selector-widget coral-select-item:selected")[0]
+        .value;
+
+      $(CP_DIALOG_REL).find(":input, coral-select").each(function (e) {
+          var elemName = $(this).attr("name");
+          var itemType = $(this).attr("itemtype");
+
+          if (elemName && itemType) {
+            if (itemType !== selectedWidget) {
+              let divWrapper = $(this).closest("div.coral-Form-fieldwrapper");
+              divWrapper.attr("hidden", "");
+              if (divWrapper.find("label#hideOption").length < 1 && divWrapper.find("input.hideOption").length < 1) {
+                let deleteName = elemName + "@Delete";
+                $("<input>").attr({ type: "hidden", name: deleteName }).appendTo(CP_DIALOG_REL);
+                $(this).attr("disabled", "");
+              }
+            } else {
+              let divWrapper = $(this).closest("div.coral-Form-fieldwrapper");
+              if (divWrapper.find("label#hideOption").length < 1 && divWrapper.find("input.hideOption").length < 1) {
+                divWrapper.removeAttr("hidden");
+              }
+              $(this).removeAttr("disabled");
+            }
+          }
+        });
+    }
+
+   $(document).on("foundation-contentloaded", function (e) {
+        let usageTypeSelectElem = $(".selector-widget").get(0);
+        Coral.commons.ready(usageTypeSelectElem, function() {
+            handleHiddenOptions();
+            handleSelection();
+            usageTypeSelectElem.on('change', handleSelection);
+        });
     });
 
 })(document, window, jQuery);

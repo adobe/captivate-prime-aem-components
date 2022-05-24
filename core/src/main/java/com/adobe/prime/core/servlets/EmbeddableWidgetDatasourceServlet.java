@@ -169,6 +169,7 @@ public class EmbeddableWidgetDatasourceServlet extends SlingAllMethodsServlet
     if (hideOption)
     {
       vm.put("labelId", "hideOption");
+      vm.put("granite:rel", "hideOption");
     }
     return new ValueMapResource(request.getResourceResolver(), "", resourceType, vm);
   }
