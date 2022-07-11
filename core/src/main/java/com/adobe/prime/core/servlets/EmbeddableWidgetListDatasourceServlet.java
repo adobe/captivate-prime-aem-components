@@ -41,10 +41,10 @@ import com.adobe.prime.core.services.EmbeddableWidgetConfigurationService;
 import com.adobe.prime.core.services.EmbeddableWidgetService;
 import com.adobe.prime.core.utils.EmbeddableWidgetConfigUtils;
 
-@Component(label = "Captivate Prime Widget List Datasource Servlet", description = "Captivate Prime Widget List Datasource Servlet")
+@Component(label = "Adobe Learning Manager Widget List Datasource Servlet", description = "Adobe Learning Manager Widget List Datasource Servlet")
 @Properties({@Property(name = "sling.servlet.resourceTypes", value = {EmbeddableWidgetListDatasourceServlet.RESOURCE_TYPE}, propertyPrivate = true),
     @Property(name = "sling.servlet.methods", value = HttpConstants.METHOD_GET, propertyPrivate = true),
-    @Property(name = org.osgi.framework.Constants.SERVICE_DESCRIPTION, value = "Captivate Prime Widget List Datasource Servlet")})
+    @Property(name = org.osgi.framework.Constants.SERVICE_DESCRIPTION, value = "Adobe Learning Manager Widget List Datasource Servlet")})
 @Service(Servlet.class)
 public class EmbeddableWidgetListDatasourceServlet extends SlingAllMethodsServlet
 {

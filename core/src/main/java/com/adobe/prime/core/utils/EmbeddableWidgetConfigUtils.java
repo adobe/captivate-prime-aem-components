@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 
 import org.apache.http.ParseException;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -55,6 +56,31 @@ public final class EmbeddableWidgetConfigUtils
       return Arrays.asList(gson.fromJson(configs, EmbeddableWidgetsConfig[].class));
     }
     return null;
+  }
+  
+  public static boolean isAccountSKUValid(String hostName, String accountId)
+  {
+	  String skuUrl = hostName + Constants.CPUrl.SKU_VALIDATION_URL.replace("{accountId}", accountId);
+	  HttpGet getCall = new HttpGet(skuUrl);
+
+	  try (CloseableHttpClient httpClient = HttpClients.createDefault(); CloseableHttpResponse response = httpClient.execute(getCall))
+	  {
+		  JsonObject configResponse =  new Gson().fromJson(EntityUtils.toString(response.getEntity()), JsonObject.class);
+		  String skuValidator = Optional.ofNullable(configResponse)
+		  		  .map(data -> data.get("data")).map(dataObj -> dataObj.getAsJsonObject())
+		  		  .map(attr -> attr.get("attributes")).map(attrObj -> attrObj.getAsJsonObject())
+		  		  .map(config -> config.get("connectorConfig")).map(configObj -> configObj.getAsString())
+		  		  .orElse("");
+		  return (skuValidator.contains("aemComponents") && skuValidator.contains("true"));
+
+	  } catch (ParseException pe)
+      {
+        LOGGER.error("ParseException while fetching widget config", pe);
+      } catch (IOException ioe)
+      {
+        LOGGER.error("IOException while fetching widget config", ioe);
+      }
+      return false;
   }
 
   public static EmbeddableWidgetsConfig getGeneralSettingsConfig(String hostName)

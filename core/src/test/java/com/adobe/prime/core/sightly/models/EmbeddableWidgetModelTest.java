@@ -34,6 +34,7 @@ import com.adobe.prime.core.services.EmbeddableWidgetConfigurationService;
 import com.adobe.prime.core.services.EmbeddableWidgetService;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.scripting.WCMBindingsConstants;
+import com.google.gson.JsonParser;
 
 import io.wcm.testing.mock.aem.junit5.AemContext;
 import io.wcm.testing.mock.aem.junit5.AemContextExtension;
@@ -90,7 +91,7 @@ public class EmbeddableWidgetModelTest
     String expectedConfigs =
         "{\"widgetRefSelected\":\"com.adobe.captivateprime.lostrip.trending\",\"auth\":{\"accessToken\":\"123456\"},\"type\":\"acapConfig\",\"widgetConfig\":{\"widgetRef\":\"com.adobe.captivateprime.lostrip.trending\"}}";
     String configs = widgetModel.getWidgetConfigs();
-    assertTrue(expectedConfigs.equals(configs));
+    assertTrue(JsonParser.parseString(configs).equals(JsonParser.parseString(expectedConfigs)));
   }
 
   @Test

@@ -45,10 +45,10 @@ import com.adobe.prime.core.services.EmbeddableWidgetService;
 import com.adobe.prime.core.utils.EmbeddableWidgetConfigUtils;
 import com.day.cq.commons.jcr.JcrConstants;
 
-@Component(label = "Captivate Prime Widget Datasource Servlet", description = "Captivate Prime Widget Datasource Servlet")
+@Component(label = "Adobe Learning Manager Widget Datasource Servlet", description = "Adobe Learning Manager Widget Datasource Servlet")
 @Properties({@Property(name = "sling.servlet.resourceTypes", value = {EmbeddableWidgetDatasourceServlet.RESOURCE_TYPE}, propertyPrivate = true),
     @Property(name = "sling.servlet.methods", value = HttpConstants.METHOD_GET, propertyPrivate = true),
-    @Property(name = org.osgi.framework.Constants.SERVICE_DESCRIPTION, value = "Captivate Prime Widget Datasource Servlet")})
+    @Property(name = org.osgi.framework.Constants.SERVICE_DESCRIPTION, value = "Adobe Learning Manager Widget Datasource Servlet")})
 @Service(Servlet.class)
 public class EmbeddableWidgetDatasourceServlet extends SlingAllMethodsServlet
 {
@@ -169,6 +169,7 @@ public class EmbeddableWidgetDatasourceServlet extends SlingAllMethodsServlet
     if (hideOption)
     {
       vm.put("labelId", "hideOption");
+      vm.put("granite:rel", "hideOption");
     }
     return new ValueMapResource(request.getResourceResolver(), "", resourceType, vm);
   }

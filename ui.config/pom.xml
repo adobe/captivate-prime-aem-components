@@ -21,19 +21,19 @@
     <!-- ====================================================================== -->
     <parent>
         <groupId>com.adobe.prime</groupId>
-        <artifactId>captivate-prime</artifactId>
-        <version>1.3.0</version>
+        <artifactId>learning-manager</artifactId>
+        <version>1.4.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <!-- ====================================================================== -->
     <!-- P R O J E C T  D E S C R I P T I O N                                   -->
     <!-- ====================================================================== -->
-    <artifactId>captivate-prime.ui.config</artifactId>
-    <version>1.3.0</version>
+    <artifactId>learning-manager.ui.config</artifactId>
+    <version>1.4.0</version>
     <packaging>content-package</packaging>
 
-    <name>Configurations package for Captivate Prime Widget</name>
+    <name>Configurations package for Adobe Learning Manager Widget</name>
 
     <build>
         <sourceDirectory>src/main/content/jcr_root</sourceDirectory>
@@ -48,7 +48,7 @@
                     <repositoryStructurePackages>
                         <repositoryStructurePackage>
                             <groupId>com.adobe.prime</groupId>
-                            <artifactId>captivate-prime.ui.apps.structure</artifactId>
+                            <artifactId>learning-manager.ui.apps.structure</artifactId>
                         </repositoryStructurePackage>
                     </repositoryStructurePackages>
                 </configuration>
@@ -63,7 +63,7 @@
     <dependencies>
         <dependency>
             <groupId>com.adobe.prime</groupId>
-            <artifactId>captivate-prime.ui.apps.structure</artifactId>
+            <artifactId>learning-manager.ui.apps.structure</artifactId>
             <version>${project.version}</version>
             <type>zip</type>
         </dependency>

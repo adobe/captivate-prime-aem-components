@@ -19,15 +19,15 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.adobe.prime</groupId>
-		<artifactId>captivate-prime</artifactId>
-		<version>1.3.0</version>
+		<artifactId>learning-manager</artifactId>
+		<version>1.4.0</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>captivate-prime.core</artifactId>
+	<artifactId>learning-manager.core</artifactId>
 	<packaging>bundle</packaging>
-	<name>CPWidget - Core</name>
-	<description>Core bundle for Captivate Prime Widget</description>
+	<name>Adobe Learning Manager - Core</name>
+	<description>Core bundle for Adobe Learning Manager Widget</description>
 	<build>
 		<plugins>
 			<plugin>

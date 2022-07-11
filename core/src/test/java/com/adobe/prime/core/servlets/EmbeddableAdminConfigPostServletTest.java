@@ -43,7 +43,8 @@ public class EmbeddableAdminConfigPostServletTest
     ctx.request().addRequestParameter("cpWidget#commonConfig.disableLinks@TypeHint", "boolean");
     ctx.request().addRequestParameter("cpWidget#commonConfig.value", "5678");
     ctx.request().addRequestParameter("cpWidget#commonConfig.value@TypeHint", "number");
-    ctx.request().addRequestParameter("cpWidget#commonConfig.captivateHostName", "https://captivateprimeqe.adobe.com");
+    ctx.request().addRequestParameter("cpWidget#commonConfig.captivateHostName", "https://learningmanagerqe.adobe.com");
+    ctx.request().addRequestParameter("cpWidget#accountId", "7110");
     ctx.request().addRequestParameter("cpWidget#theme.background@Delete", "");
   }
   

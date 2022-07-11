@@ -22,17 +22,17 @@
     <!-- ====================================================================== -->
     <parent>
         <groupId>com.adobe.prime</groupId>
-        <artifactId>captivate-prime</artifactId>
-        <version>1.3.0</version>
+        <artifactId>learning-manager</artifactId>
+        <version>1.4.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <!-- ====================================================================== -->
     <!-- P R O J E C T  D E S C R I P T I O N                                   -->
     <!-- ====================================================================== -->
-    <artifactId>captivate-prime.all</artifactId>
+    <artifactId>learning-manager.all</artifactId>
     <packaging>content-package</packaging>
-    <name>CPWidget - All</name>
+    <name>Adobe Learning Manager - All</name>
     <description>All content package for CPWidget</description>
 
     <!-- ====================================================================== -->
@@ -57,24 +57,24 @@
                     <embeddeds>
                         <embedded>
                             <groupId>com.adobe.prime</groupId>
-                            <artifactId>captivate-prime.ui.apps</artifactId>
+                            <artifactId>learning-manager.ui.apps</artifactId>
                             <type>zip</type>
                             <target>/apps/cpWidget-packages/application/install</target>
                         </embedded>
 						<embedded>
                             <groupId>com.adobe.prime</groupId>
-                            <artifactId>captivate-prime.core</artifactId>
+                            <artifactId>learning-manager.core</artifactId>
                             <target>/apps/cpWidget-packages/application/install</target>
                         </embedded>
                         <embedded>
                             <groupId>com.adobe.prime</groupId>
-                            <artifactId>captivate-prime.ui.content</artifactId>
+                            <artifactId>learning-manager.ui.content</artifactId>
                             <type>zip</type>
                             <target>/apps/cpWidget-packages/content/install</target>
                         </embedded>
                         <embedded>
                             <groupId>com.adobe.prime</groupId>
-                            <artifactId>captivate-prime.ui.config</artifactId>
+                            <artifactId>learning-manager.ui.config</artifactId>
                             <type>zip</type>
                             <target>/apps/cpWidget-packages/application/install</target>
                         </embedded>
@@ -180,24 +180,24 @@
                             <embeddeds>
                                 <embedded>
                                     <groupId>com.adobe.prime</groupId>
-                                    <artifactId>captivate-prime.ui.apps</artifactId>
+                                    <artifactId>learning-manager.ui.apps</artifactId>
                                     <type>zip</type>
                                     <target>/apps/cpWidget-packages/application/install</target>
                                 </embedded>
                                 <embedded>
                                     <groupId>com.adobe.prime</groupId>
-                                    <artifactId>captivate-prime.core</artifactId>
+                                    <artifactId>learning-manager.core</artifactId>
                                     <target>/apps/cpWidget-packages/application/install</target>
                                 </embedded>
                                 <embedded>
                                     <groupId>com.adobe.prime</groupId>
-                                    <artifactId>captivate-prime.ui.content</artifactId>
+                                    <artifactId>learning-manager.ui.content</artifactId>
                                     <type>zip</type>
                                     <target>/apps/cpWidget-packages/content/install</target>
                                 </embedded>
                                 <embedded>
                                     <groupId>com.adobe.prime</groupId>
-                                    <artifactId>captivate-prime.ui.config</artifactId>
+                                    <artifactId>learning-manager.ui.config</artifactId>
                                     <type>zip</type>
                                     <target>/apps/cpWidget-packages/application/install</target>
                                 </embedded>
@@ -215,19 +215,19 @@
     <dependencies>
         <dependency>
             <groupId>com.adobe.prime</groupId>
-            <artifactId>captivate-prime.ui.apps</artifactId>
+            <artifactId>learning-manager.ui.apps</artifactId>
             <version>${project.version}</version>
             <type>zip</type>
         </dependency>
         <dependency>
             <groupId>com.adobe.prime</groupId>
-            <artifactId>captivate-prime.ui.content</artifactId>
+            <artifactId>learning-manager.ui.content</artifactId>
             <version>${project.version}</version>
             <type>zip</type>
         </dependency>
         <dependency>
             <groupId>com.adobe.prime</groupId>
-            <artifactId>captivate-prime.ui.config</artifactId>
+            <artifactId>learning-manager.ui.config</artifactId>
             <version>${project.version}</version>
             <type>zip</type>
         </dependency>
