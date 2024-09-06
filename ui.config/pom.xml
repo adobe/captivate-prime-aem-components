@@ -22,7 +22,7 @@
     <parent>
         <groupId>com.adobe.prime</groupId>
         <artifactId>learning-manager</artifactId>
-        <version>1.4.0</version>
+        <version>1.5.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -30,7 +30,7 @@
     <!-- P R O J E C T  D E S C R I P T I O N                                   -->
     <!-- ====================================================================== -->
     <artifactId>learning-manager.ui.config</artifactId>
-    <version>1.4.0</version>
+    <version>1.5.0</version>
     <packaging>content-package</packaging>
 
     <name>Configurations package for Adobe Learning Manager Widget</name>
