@@ -76,7 +76,7 @@ public class EmbeddableWidgetConfigurationServiceImplTest
 	  Map<String, Object> generalConfigs = configServiceImpl.getGeneralConfigs(ctx.currentResource());
 	  assertTrue(generalConfigs.get("testConfig") == null);
 	  assertTrue("transparent".equals(generalConfigs.get("theme.background").toString()));
-	  assertTrue("https://captivateprimeqe.adobe.com".equals(generalConfigs.get("commonConfig.captivateHostName").toString()));
+	  assertTrue("https://learningmanager.adobe.com".equals(generalConfigs.get("commonConfig.captivateHostName").toString()));
   }
 
 }

@@ -33,7 +33,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.LoginException;
@@ -45,6 +44,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.adobe.prime.core.Constants;
+import com.adobe.prime.core.utils.HttpConfigUtils;
 import com.day.cq.wcm.api.Page;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -71,7 +71,7 @@ public class EmbeddableWidgetServiceImpl implements EmbeddableWidgetService
 
   private static final long ACCESS_TOKEN_EXPIRY_BUFFER_MS = 86400000; // 24 Hr
   private static final long ACCESS_TOKEN_MIN_VALIDITY_SEC = 86400; // 24 Hr
-  private final static String DEFAULT_HOST = "https://learningmanagerqe.adobe.com";
+  private final static String DEFAULT_HOST = "https://learningmanager.adobe.com";
 
   @Property(label = "HostName", description = "Provide hostname to fetch configs in the format (https://learningmanager.adobe.com).",
       value = DEFAULT_HOST)
@@ -173,7 +173,7 @@ public class EmbeddableWidgetServiceImpl implements EmbeddableWidgetService
       requestBodyMap.put("refresh_token", refreshToken);
       post.setEntity(new StringEntity(new Gson().toJson(requestBodyMap), ContentType.APPLICATION_JSON));
 
-      try (CloseableHttpClient httpClient = HttpClients.createDefault(); CloseableHttpResponse response = httpClient.execute(post))
+      try (CloseableHttpClient httpClient = HttpConfigUtils.createHttpClient(); CloseableHttpResponse response = httpClient.execute(post))
       {
         return EntityUtils.toString(response.getEntity());
       } catch (ParseException | IOException e)

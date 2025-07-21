@@ -63,10 +63,10 @@ public class EmbeddableWidgetModelTest
     
     lenient().when(widgetService.getAccessTokenOfUser(eq(ctx.request()), any(Page.class)))
         .thenReturn("123456");
-    lenient().when(widgetService.getDefaultHostName()).thenReturn("https://captivateprimeqe.adobe.com");
+    lenient().when(widgetService.getDefaultHostName()).thenReturn("https://learningmanager.adobe.com");
     ctx.registerService(EmbeddableWidgetService.class, widgetService, org.osgi.framework.Constants.SERVICE_RANKING, Integer.MAX_VALUE);
     Map<String, Object> adminConfigs = new HashMap<>();
-    adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "commonConfig.captivateHostName", "https://captivateprimeqe.adobe.com");
+    adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "commonConfig.captivateHostName", "https://learningmanager.adobe.com");
     adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "refreshToken", "1234");
     adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "theme.background", "transparent");
 
@@ -107,7 +107,7 @@ public class EmbeddableWidgetModelTest
   void testWidgetSrcUrl()
   {
     String expectedWidgteSrcUrl =
-        "https://captivateprimeqe.adobe.com/app/embeddablewidget?widgetRef=com.adobe.captivateprime.primeStrip&resourceType=html";
+        "https://learningmanager.adobe.com/app/embeddablewidget?widgetRef=com.adobe.captivateprime.primeStrip&resourceType=html";
     String widgetSrcUrl = widgetModel.getWidgetSrcUrl();
     assertTrue(expectedWidgteSrcUrl.equals(widgetSrcUrl));
   }
@@ -131,7 +131,7 @@ public class EmbeddableWidgetModelTest
   @Test
   void testWidgetCommunicatorUrl()
   {
-    String expectedWidgetCommUrl = "https://captivateprimeqe.adobe.com/app/embeddablewidget?widgetRef=com.adobe.captivateprime.widgetcommunicator";
+    String expectedWidgetCommUrl = "https://learningmanager.adobe.com/app/embeddablewidget?widgetRef=com.adobe.captivateprime.widgetcommunicator";
     String widgetCommUrl = widgetModel.getWidgetCommunicatorUrl();
     assertTrue(expectedWidgetCommUrl.equals(widgetCommUrl));
   }

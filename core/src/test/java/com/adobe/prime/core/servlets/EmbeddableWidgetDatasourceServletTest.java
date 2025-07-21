@@ -59,7 +59,7 @@ public class EmbeddableWidgetDatasourceServletTest
     dsServlet = new EmbeddableWidgetDatasourceServlet();
 
     Map<String, Object> adminConfigs = new HashMap<>();
-    adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "commonConfig.captivateHostName", "https://captivateprimeqe.adobe.com");
+    adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "commonConfig.captivateHostName", "https://learningmanager.adobe.com");
     adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "refreshToken", "f85a9acef88772630c7a55ea3ed9db96");
     adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "theme.background", "transparent");
     lenient().when(widgetConfigService.getAvailaleAdminConfiguration(any(Resource.class))).thenReturn(adminConfigs);

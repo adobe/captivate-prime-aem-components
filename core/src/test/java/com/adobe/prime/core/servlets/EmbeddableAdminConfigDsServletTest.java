@@ -66,11 +66,11 @@ public class EmbeddableAdminConfigDsServletTest
     dsServlet = new EmbeddableAdminConfigDsServlet();
 
     Map<String, Object> adminConfigs = new HashMap<>();
-    adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "commonConfig.captivateHostName", "https://captivateprimeqe.adobe.com");
+    adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "commonConfig.captivateHostName", "https://learningmanager.adobe.com");
     adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "refreshToken", "f85a9acef88772630c7a55ea3ed9db96");
     adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "theme.background", "transparent");
     lenient().when(widgetConfigService.getAvailaleAdminConfiguration(any(Resource.class))).thenReturn(adminConfigs);
-    lenient().when(widgetService.getDefaultHostName()).thenReturn("https://captivateprimeqe.adobe.com");
+    lenient().when(widgetService.getDefaultHostName()).thenReturn("https://learningmanager.adobe.com");
 
     Field replicatorField = EmbeddableAdminConfigDsServlet.class.getDeclaredField("widgetService");
     replicatorField.setAccessible(true);

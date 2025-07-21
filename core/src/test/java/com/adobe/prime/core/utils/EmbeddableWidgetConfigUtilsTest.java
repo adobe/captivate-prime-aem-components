@@ -33,10 +33,10 @@ public class EmbeddableWidgetConfigUtilsTest
   @BeforeEach
   public void setUp()
   {
-    hostName = "https://captivateprimeqe.adobe.com";
+    hostName = "https://learningmanager.adobe.com";
     widgetObject = new HashMap<>();
     widgetObject.put("auth.accessToken", "1234");
-    widgetObject.put("commonConfig.captivateHostName", "https://captivateprimeqe.adobe.com");
+    widgetObject.put("commonConfig.captivateHostName", "https://learningmanager.adobe.com");
     widgetObject.put("commonConfig.disableLinks", true);
     widgetObject.put("theme.primaryColor", "rgb(38,118,255)");
     widgetObject.put("theme.background", "transparent");
@@ -65,7 +65,7 @@ public class EmbeddableWidgetConfigUtilsTest
     assertTrue(accessToken.equals("1234"));
     JsonObject commonObject = objects.get("commonConfig").getAsJsonObject();
     String hostName = commonObject.get("captivateHostName").getAsString();
-    assertTrue(hostName.equals("https://captivateprimeqe.adobe.com"));
+    assertTrue(hostName.equals("https://learningmanager.adobe.com"));
     String disableLink = commonObject.get("disableLinks").getAsString();
     assertTrue(disableLink.equals("true"));
     JsonObject themeObject = objects.get("theme").getAsJsonObject();

@@ -20,11 +20,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 
+import org.apache.http.HttpStatus;
 import org.apache.http.ParseException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,7 +63,7 @@ public final class EmbeddableWidgetConfigUtils
 	  String skuUrl = hostName + Constants.CPUrl.SKU_VALIDATION_URL.replace("{accountId}", accountId);
 	  HttpGet getCall = new HttpGet(skuUrl);
 
-	  try (CloseableHttpClient httpClient = HttpClients.createDefault(); CloseableHttpResponse response = httpClient.execute(getCall))
+	  try (CloseableHttpClient httpClient = HttpConfigUtils.createHttpClient(); CloseableHttpResponse response = httpClient.execute(getCall))
 	  {
 		  JsonObject configResponse =  new Gson().fromJson(EntityUtils.toString(response.getEntity()), JsonObject.class);
 		  String skuValidator = Optional.ofNullable(configResponse)
@@ -175,12 +175,17 @@ public final class EmbeddableWidgetConfigUtils
     {
       HttpGet getCall = new HttpGet(url);
 
-      try (CloseableHttpClient httpClient = HttpClients.createDefault(); CloseableHttpResponse response = httpClient.execute(getCall))
+      try (CloseableHttpClient httpClient = HttpConfigUtils.createHttpClient();
+           CloseableHttpResponse response = httpClient.execute(getCall))
       {
-        String configResponse = EntityUtils.toString(response.getEntity());
-        setLastUpdated(currentTime + UPDATE_EVERY_MILLI);
-        setResponse(configResponse);
-        return configResponse;
+        int statusCode = response.getStatusLine().getStatusCode();
+        if (HttpStatus.SC_OK == statusCode && response.getEntity() != null) {
+          String configResponse = EntityUtils.toString(response.getEntity());
+          setLastUpdated(currentTime + UPDATE_EVERY_MILLI);
+          setResponse(configResponse);
+          return configResponse;
+        }
+        LOGGER.error("Exception while fetching widget config from url {} returning config {}", widgetsConfigResponse);
       } catch (ParseException pe)
       {
         LOGGER.error("ParseException while fetching widget config", pe);

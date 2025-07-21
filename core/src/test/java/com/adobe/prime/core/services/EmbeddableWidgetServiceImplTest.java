@@ -88,7 +88,7 @@ public class EmbeddableWidgetServiceImplTest
     ctx.registerService(EmbeddableWidgetUserService.class, widgetUserService, org.osgi.framework.Constants.SERVICE_RANKING, Integer.MAX_VALUE);
 
     Map<String, Object> adminConfigs = new HashMap<>();
-    adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "commonConfig.captivateHostName", "https://captivateprimeqe.adobe.com");
+    adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "commonConfig.captivateHostName", "https://learningmanager.adobe.com");
     adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "refreshToken", "1234");
     adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "clientId", "1234");
     adminConfigs.put(Constants.CP_NODE_PROPERTY_PREFIX + "clientSecret", "1234");

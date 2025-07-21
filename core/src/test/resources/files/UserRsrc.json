@@ -1,7 +1,7 @@
  {
      "profile": {
        "jcr:primaryType": "cq:PageContent",
-       "cpWidget#commonConfig.captivateHostName": "https://captivateprimeqe.adobe.com",
+       "cpWidget#commonConfig.captivateHostName": "https://learningmanager.adobe.com",
        "cpWidget#refreshToken": "123456",
        "cpWidget#theme.background": "transparent"
        }
